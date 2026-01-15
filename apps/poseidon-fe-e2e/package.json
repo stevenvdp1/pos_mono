@@ -1,0 +1,10 @@
+{
+  "name": "@pos-mono/poseidon-fe-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@pos-mono/poseidon-fe"
+    ]
+  }
+}
