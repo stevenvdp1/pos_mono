@@ -72,5 +72,3 @@ export const ImoNumberField: React.FC<ImoNumberFieldProps> = ({
     </FloatLabel>
   );
 };
-
-export default ImoNumberField;
