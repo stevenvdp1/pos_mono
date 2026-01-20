@@ -11,6 +11,9 @@
     },
     {
       "path": "./libs/poseidon-api"
+    },
+    {
+      "path": "./libs/authentication"
     }
   ]
 }

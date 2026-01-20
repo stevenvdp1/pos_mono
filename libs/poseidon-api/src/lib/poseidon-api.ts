@@ -1,8 +1,16 @@
-import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
-import { msalInstance } from '@auth/index'
-import { apiRequest } from '@config/authConfig'
+import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios';
+import { type PublicClientApplication } from '@azure/msal-browser';
+import { MSALConfig } from '@pos-mono/authentication';
 
-const api = (baseURL: string) => {
+export interface PoseidonApiConfig {
+    baseURL: string;
+    msalInstance: PublicClientApplication;
+    msalConfig: MSALConfig;
+}
+
+const api = (config: PoseidonApiConfig) => {
+    const { baseURL, msalInstance, msalConfig } = config;
+    
     const instance = axios.create({
         baseURL: `${baseURL}/api`,
         headers: {
@@ -12,26 +20,26 @@ const api = (baseURL: string) => {
 
     // Request interceptor for auth and tenant context
     instance.interceptors.request.use(
-        async (config: InternalAxiosRequestConfig) => {
+        async (axiosConfig: InternalAxiosRequestConfig) => {
             // Get the active account
             const accounts = msalInstance.getAllAccounts();
             if (accounts.length > 0) {
                 try {
                     // Try to acquire token silently
                     const response = await msalInstance.acquireTokenSilent({
-                        scopes: apiRequest.scopes,
+                        scopes: msalConfig.getApiScopes(),
                         account: accounts[0],
                     });
                     
                     // Add the token to the Authorization header
-                    config.headers.Authorization = `Bearer ${response.accessToken}`;
+                    axiosConfig.headers.Authorization = `Bearer ${response.accessToken}`;
                 } catch (error) {
                     console.error('Failed to acquire token silently:', error);
                     // Token acquisition failed - the user may need to re-authenticate
                     // This will be handled by the AuthProvider
                 }
             }
-            return config;
+            return axiosConfig;
         },
         (error) => Promise.reject(error)
     );
@@ -50,4 +58,5 @@ const api = (baseURL: string) => {
 
     return instance;
 };
+
 export default api;
