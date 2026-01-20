@@ -238,7 +238,7 @@ npm install
 Clear the Vite cache:
 
 ```bash
-rm -rf node_modules/.vite
+rm -rf ../../node_modules/.vite/apps/poseidon-fe
 ```
 
 ### Authentication Issues
@@ -266,4 +266,4 @@ When contributing to this application:
 
 ## License
 
-This project is part of the pos_mono monorepo. Refer to the root LICENSE file for details.
+This project is part of the pos_mono monorepo.
