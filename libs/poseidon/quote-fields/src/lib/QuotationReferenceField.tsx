@@ -45,7 +45,7 @@ export const QuotationReferenceField: React.FC<QuotationReferenceFieldProps> = (
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
-      onChange((e.target as HTMLInputElement).value);
+      onChange(e.target.value);
     }
   };
 
