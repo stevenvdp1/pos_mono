@@ -1,0 +1,30 @@
+{
+  "name": "@pos-mono/quote-fields",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@pos-mono/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "nx": {
+    "name": "quote-fields"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "primereact": "^10.9.7",
+    "react-i18next": "^16.5.3",
+    "i18next": "^25.8.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
