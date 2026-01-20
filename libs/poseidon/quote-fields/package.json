@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "primereact": "^10.0.0",
-    "react-i18next": "^13.0.0",
-    "i18next": "^23.0.0"
+    "primereact": "^10.9.7",
+    "react-i18next": "^16.5.3",
+    "i18next": "^25.8.0"
   },
   "peerDependencies": {
     "react": "^19.0.0",
