@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from 'primereact/floatlabel';
@@ -34,10 +34,12 @@ export const ShipNameField: React.FC<ShipNameFieldProps> = ({
   ...props
 }) => {
   const { t } = useTranslation();
+  const inputId = useId();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (onChange) {
-      onChange((e.target as HTMLInputElement).value);
+      const { value } = e.target;
+      onChange(value);
     }
   };
 
@@ -45,13 +47,13 @@ export const ShipNameField: React.FC<ShipNameFieldProps> = ({
     <div {...props}>
       <FloatLabel>
         <InputText
-          id="shipName"
+          id={inputId}
           value={value}
           onChange={handleChange}
           disabled={disabled}
           className={error ? 'p-invalid' : ''}
         />
-        <label htmlFor="shipName">{t('quote.fields.shipName')}</label>
+        <label htmlFor={inputId}>{t('quote.fields.shipName')}</label>
       </FloatLabel>
       {error && <small className="p-error">{error}</small>}
     </div>
