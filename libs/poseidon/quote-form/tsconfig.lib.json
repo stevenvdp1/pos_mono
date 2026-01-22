@@ -2,6 +2,7 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
+    "rootDir": "src",
     "types": [
       "node",
       "@nx/react/typings/cssmodule.d.ts",
@@ -9,7 +10,7 @@
       "vite/client"
     ],
     "jsx": "react-jsx",
-    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo"
+    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
   },
   "exclude": [
     "out-tsc",

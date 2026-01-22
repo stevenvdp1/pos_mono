@@ -2,16 +2,20 @@ import { useForm } from "react-hook-form"
 
 export interface IQuoteForm{
     shipName:string
-    loa:number
-    beam:number
-    draft:number
+    quoteReference:string
+    clientReference:string
+    loa:number | null   
+    beam:number | null
+    draft:number | null
 }
 
 const QuoteFormDefaultValues: IQuoteForm = {
     shipName: '',
-    loa: 0,
-    beam: 0,
-    draft: 0
+    quoteReference: '',
+    clientReference: '',
+    loa: null,
+    beam: null,
+    draft: null
 }
 
 export const useQuoteForm = () =>{

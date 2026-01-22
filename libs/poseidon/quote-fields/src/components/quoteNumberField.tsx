@@ -1,6 +1,5 @@
 import { useId } from "react";
-import { Controller } from "react-hook-form";
-import { useQuoteFormContext } from "@pos-mono/quote-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { InputNumber } from 'primereact/inputnumber';
 import { FloatLabel } from 'primereact/floatlabel';
 import { useTranslation } from "react-i18next";
@@ -12,7 +11,7 @@ export interface IQuoteNumberFieldProps {
 export const QuoteNumberField: React.FC<IQuoteNumberFieldProps> = ({ fieldName }) => {
     const id = useId();
     const { t } = useTranslation();
-    const formContext = useQuoteFormContext();
+    const formContext = useFormContext();
 
     return (
         <FloatLabel>

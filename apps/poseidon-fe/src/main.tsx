@@ -1,3 +1,4 @@
+import './main.css';
 import { BrowserRouter } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
 import { App } from './app';
@@ -19,8 +20,8 @@ const msalConfig = new MSALConfig({
 
 root.render(
   <BrowserRouter>
-    <AuthProvider msalConfig={msalConfig}>
+    {/* <AuthProvider msalConfig={msalConfig}> */}
       <App />
-    </AuthProvider>
+    {/* </AuthProvider> */}
   </BrowserRouter>
 );
