@@ -7,6 +7,7 @@
   "dependencies": {
     "@azure/msal-browser": "^4.27.0",
     "@azure/msal-react": "^3.0.23",
+    "@juristr/nx-tailwind-sync": "^0.0.8",
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.2",
     "react": "^19.0.0",
@@ -43,6 +44,7 @@
     "@vitest/coverage-v8": "^4.0.0",
     "@vitest/ui": "^4.0.0",
     "ajv": "^8.0.0",
+    "autoprefixer": "10.4.13",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-import": "2.31.0",
@@ -54,6 +56,7 @@
     "jiti": "2.4.2",
     "jsdom": "~22.1.0",
     "nx": "22.3.3",
+    "postcss": "8.4.38",
     "primereact": "^10.9.7",
     "react-i18next": "^16.5.3",
     "sass": "^1.55.0",

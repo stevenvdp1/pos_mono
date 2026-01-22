@@ -2,13 +2,12 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
     "types": [
       "node",
       "@nx/react/typings/cssmodule.d.ts",
-      "@nx/react/typings/image.d.ts",
-      "vite/client"
+      "@nx/react/typings/image.d.ts"
     ],
+    "rootDir": "src",
     "jsx": "react-jsx",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo"
   },
@@ -44,6 +43,5 @@
     "src/**/*.jsx",
     "src/**/*.ts",
     "src/**/*.tsx"
-  ],
-  "references": []
+  ]
 }

@@ -25,7 +25,7 @@
     "src/**/*.test.jsx",
     "src/**/*.spec.jsx",
     "src/**/*.d.ts"
-, "src/components/quoteTextField.ts"  ],
+  ],
   "references": [
     {
       "path": "./tsconfig.lib.json"

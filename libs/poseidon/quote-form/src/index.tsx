@@ -1,11 +1,11 @@
-import { useQuoteForm } from "../hooks/useQuoteForm"
+import './index.css'
 import { FormProvider } from "react-hook-form"
-import { QuoteNumberField, QuoteTextField } from "@pos-mono/quote-fields"
-import { QuoteFormSection } from "./quoteFormSection"
+import { QuoteNumberField, QuoteTextField } from "@pos-mono/quote-form-fields"
+import { QuoteFormSection } from "./components"
+import { useQuoteForm } from "./hooks"
 
-export const QuoteForm = () => {
+const QuoteForm = () => {
     const { methods, onSubmit } = useQuoteForm()
-
     return (
         <FormProvider {...methods}>
             <form onSubmit={onSubmit}>
@@ -22,3 +22,5 @@ export const QuoteForm = () => {
         </FormProvider>
     )
 }
+
+export default QuoteForm

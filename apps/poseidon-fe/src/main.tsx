@@ -1,4 +1,4 @@
-import './main.css';
+import './styles.css';
 import { BrowserRouter } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
 import { App } from './app';
@@ -22,6 +22,7 @@ root.render(
   <BrowserRouter>
     {/* <AuthProvider msalConfig={msalConfig}> */}
       <App />
+      
     {/* </AuthProvider> */}
   </BrowserRouter>
 );

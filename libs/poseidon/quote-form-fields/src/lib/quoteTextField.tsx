@@ -20,11 +20,11 @@ export const QuoteTextField: React.FC<IQuoteTextFieldProps> = ({ fieldName }) =>
                 control={formContext.control}
                 render={({ field }) => (
                     <InputText
-                        id={id}
-                        {...field}
+                    id={id}
+                    {...field}
                     />
                 )}
-            />
+                />
             <label htmlFor={fieldName}>{t(fieldName)}</label>
         </FloatLabel>
     )

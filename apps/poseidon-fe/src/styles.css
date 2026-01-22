@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* nx-tailwind-sources:start */
+@source "..\..\..\libs\authentication";
+@source "..\..\..\libs\poseidon\quote-form";
+@source "..\..\..\libs\poseidon\quote-form-fields";
+/* nx-tailwind-sources:end */
+
+@import "primereact/resources/themes/lara-light-cyan/theme.css";

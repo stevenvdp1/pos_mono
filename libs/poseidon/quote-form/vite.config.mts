@@ -3,11 +3,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import * as path from 'path';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
   cacheDir: '../../../node_modules/.vite/libs/poseidon/quote-form',
-  plugins: [react(), dts({ entryRoot: 'src', tsconfigPath: path.join(import.meta.dirname, 'tsconfig.lib.json') })],
+  plugins: [react(), tailwindcss(),dts({ entryRoot: 'src', tsconfigPath: path.join(import.meta.dirname, 'tsconfig.lib.json') })],
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [],
@@ -23,7 +24,7 @@ export default defineConfig(() => ({
     },
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: 'src/index.tsx',
       name: 'quote-form',
       fileName: 'index',
       // Change this to the formats you want to support.
