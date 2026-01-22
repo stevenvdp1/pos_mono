@@ -46,7 +46,7 @@
   ],
   "references": [
     {
-      "path": "../quote-form/tsconfig.lib.json"
+      "path": "../quote-fields/tsconfig.lib.json"
     }
   ]
 }

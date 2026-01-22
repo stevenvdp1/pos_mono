@@ -43,6 +43,9 @@
   "references": [
     {
       "path": "../../libs/authentication/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/poseidon/quote-form/tsconfig.lib.json"
     }
   ]
 }

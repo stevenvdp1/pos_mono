@@ -1,5 +1,5 @@
 {
-  "name": "@pos-mono/quote-fields",
+  "name": "@pos-mono/quote-form",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -15,17 +15,9 @@
     }
   },
   "nx": {
-    "name": "quote-fields"
+    "name": "quote-form"
   },
   "dependencies": {
-    "tslib": "^2.3.0",
-    "primereact": "^10.9.7",
-    "react-i18next": "^16.5.3",
-    "i18next": "^25.8.0",
-    "react-hook-form": "^7.71.1"
-  },
-  "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@pos-mono/quote-fields": "*"
   }
 }

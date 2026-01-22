@@ -16,6 +16,12 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@pos-mono/source"]
+    "customConditions": ["@pos-mono/source"],
+    "paths": {
+      "@pos-mono/quote-fields": ["./libs/poseidon/quote-fields/src/index.ts"],
+      "@pos-mono/quote-form": ["./libs/poseidon/quote-form/src/index.ts"],
+      "@pos-mono/poseidon-api": ["./libs/poseidon-api/src/index.ts"],
+      "@pos-mono/authentication": ["./libs/authentication/src/index.ts"]
+    }
   }
 }

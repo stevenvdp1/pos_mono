@@ -1,3 +1,5 @@
+import { QuoteForm } from '@pos-mono/quote-form';
+
 export const App = () =>{
-    return <div>Poseidon Application</div>;
+    return <QuoteForm></QuoteForm>;
 }

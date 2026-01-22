@@ -1,6 +1,7 @@
 /// <reference types='vitest' />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
@@ -14,6 +15,15 @@ export default defineConfig(() => ({
     host: 'localhost',
   },
   plugins: [react()],
+  resolve: {
+    conditions: ['@pos-mono/source'],
+    alias: {
+      '@pos-mono/quote-fields': path.resolve(__dirname, '../../libs/poseidon/quote-fields/src/index.ts'),
+      '@pos-mono/quote-form': path.resolve(__dirname, '../../libs/poseidon/quote-form/src/index.ts'),
+      '@pos-mono/poseidon-api': path.resolve(__dirname, '../../libs/poseidon-api/src/index.ts'),
+      '@pos-mono/authentication': path.resolve(__dirname, '../../libs/authentication/src/index.ts'),
+    },
+  },
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [],
