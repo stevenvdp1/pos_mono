@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import * as ReactDOM from 'react-dom/client';
 import { App } from './app';
 import { AuthProvider, MSALConfig } from '@pos-mono/authentication';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,11 +19,16 @@ const msalConfig = new MSALConfig({
   apiScopes: ['api://5605bcee-7a37-4a81-a7ff-3da205d7e44e/access_as_user'],
 });
 
+const queryClient = new QueryClient()
+
+
 root.render(
   <BrowserRouter>
     {/* <AuthProvider msalConfig={msalConfig}> */}
+    <QueryClientProvider client={queryClient}>
+
       <App />
-      
+    </QueryClientProvider>
     {/* </AuthProvider> */}
   </BrowserRouter>
 );

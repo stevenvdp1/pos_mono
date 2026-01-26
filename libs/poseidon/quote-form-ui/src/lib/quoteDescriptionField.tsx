@@ -1,14 +1,14 @@
+import { FloatLabel } from "primereact/floatlabel";
 import { useId } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { InputText } from 'primereact/inputtext';
-import { FloatLabel } from 'primereact/floatlabel';
 import { useTranslation } from "react-i18next";
+import { InputTextarea } from 'primereact/inputtextarea';
 
-export interface IQuoteTextFieldProps {
+export interface IQuoteDescriptionFieldProps {
     fieldName: string;
 }
 
-export const QuoteTextField: React.FC<IQuoteTextFieldProps> = ({ fieldName }) => {
+export const QuoteDescriptionField: React.FC<IQuoteDescriptionFieldProps> = ({ fieldName }) => {
     const id = useId();
     const { t } = useTranslation();
     const formContext = useFormContext();
@@ -19,10 +19,12 @@ export const QuoteTextField: React.FC<IQuoteTextFieldProps> = ({ fieldName }) =>
                 name={fieldName}
                 control={formContext.control}
                 render={({ field }) => (
-                    <InputText
+                    <InputTextarea
                         id={id}
-                        {...field}
                         className="w-full"
+                        value={field.value}
+                        onChange={(e: any) => field.onChange(e.target.value)}
+                        rows={5}
                     />
                 )}
             />

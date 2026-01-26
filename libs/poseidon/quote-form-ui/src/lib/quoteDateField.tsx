@@ -1,28 +1,28 @@
+import { FloatLabel } from "primereact/floatlabel";
 import { useId } from "react";
-import { Controller, useFormContext } from "react-hook-form";
-import { InputText } from 'primereact/inputtext';
-import { FloatLabel } from 'primereact/floatlabel';
+import { Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
-export interface IQuoteTextFieldProps {
+import { Calendar } from 'primereact/calendar';
+export interface IQuoteDateFieldProps {
     fieldName: string;
 }
 
-export const QuoteTextField: React.FC<IQuoteTextFieldProps> = ({ fieldName }) => {
+export const QuoteDateField: React.FC<IQuoteDateFieldProps> = ({ fieldName }) => {
     const id = useId();
     const { t } = useTranslation();
-    const formContext = useFormContext();
 
     return (
         <FloatLabel>
             <Controller
                 name={fieldName}
-                control={formContext.control}
                 render={({ field }) => (
-                    <InputText
+                    <Calendar
                         id={id}
-                        {...field}
+                        value={field.value}
+                        onChange={e=>field.onChange(e.value)}
                         className="w-full"
+                        dateFormat="dd/mm/yy"
+                        showIcon
                     />
                 )}
             />

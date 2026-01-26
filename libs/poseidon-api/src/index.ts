@@ -1,1 +1,3 @@
-export * from './lib/poseidon-api.js';
+export * from './lib/poseidon-api';
+export * from  './lib/client';
+export * from './lib/hooks/useClientConfig';
