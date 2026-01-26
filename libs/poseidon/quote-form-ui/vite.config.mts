@@ -5,14 +5,14 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig(() => ({
   root: __dirname,
-  cacheDir: '../../../node_modules/.vite/libs/poseidon/quote-form-fields',
+  cacheDir: '../../../node_modules/.vite/libs/poseidon/quote-form-ui',
   plugins: [react(), tailwindcss()],
   // Uncomment this if you are using workers.
   // worker: {
   //  plugins: [],
   // },
   test: {
-    'name': 'quote-form-fields',
+    'name': 'quote-form-ui',
     'watch': false,
     'globals': true,
     'environment': "jsdom",

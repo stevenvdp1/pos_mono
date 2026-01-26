@@ -18,6 +18,6 @@
     "name": "quote-form"
   },
   "dependencies": {
-    "@pos-mono/quote-form-fields": "*"
+    "@pos-mono/quote-form-ui": "*"
   }
 }

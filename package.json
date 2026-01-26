@@ -69,6 +69,7 @@
   },
   "workspaces": [
     "apps/*",
-    "libs/**"
+    "libs/**",
+    "quote-form-ui"
   ]
 }

@@ -19,7 +19,7 @@
       "path": "./libs/poseidon/quote-form"
     },
     {
-      "path": "./libs/poseidon/quote-form-fields"
+      "path": "./libs/poseidon/quote-form-ui"
     }
   ]
 }

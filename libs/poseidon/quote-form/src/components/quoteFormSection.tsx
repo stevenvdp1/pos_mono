@@ -6,15 +6,14 @@ interface IQuoteFormSectionProps extends PropsWithChildren {
 }
 
 export const QuoteFormSection: React.FC<IQuoteFormSectionProps> = ({ label, children }) => {
-
     const id = useId();
     const { t } = useTranslation();
     const [open, setOpen] = useState(true);
 
     return (
         <div id={id}>
-            <div className="cursor-pointer bg-red-500 p-2" onClick={() => setOpen(!open)}>{t(label)}</div>
-            <div className={open ? 'block' : 'hidden'}>
+            <div className="cursor-pointer p-2" onClick={() => setOpen(!open)}>{t(label)}</div>
+            <div className={`${open ? 'block' : 'hidden'} grid gap-8 py-8 px-4`}>
                 {children}
             </div>
         </div>

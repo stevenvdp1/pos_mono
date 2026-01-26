@@ -1,14 +1,14 @@
 import { useId } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { InputNumber } from 'primereact/inputnumber';
+import { InputText } from 'primereact/inputtext';
 import { FloatLabel } from 'primereact/floatlabel';
 import { useTranslation } from "react-i18next";
 
-export interface IQuoteNumberFieldProps {
+export interface IQuoteTextFieldProps {
     fieldName: string;
 }
 
-export const QuoteNumberField: React.FC<IQuoteNumberFieldProps> = ({ fieldName }) => {
+export const QuoteTextField: React.FC<IQuoteTextFieldProps> = ({ fieldName }) => {
     const id = useId();
     const { t } = useTranslation();
     const formContext = useFormContext();
@@ -19,13 +19,13 @@ export const QuoteNumberField: React.FC<IQuoteNumberFieldProps> = ({ fieldName }
                 name={fieldName}
                 control={formContext.control}
                 render={({ field }) => (
-                    <InputNumber
-                        id={id}
-                        value={field.value}
-                        onValueChange={e => field.onChange(e.value)}
+                    <InputText
+                    id={id}
+                    {...field}
+                    className="w-full"
                     />
                 )}
-            />
+                />
             <label htmlFor={fieldName}>{t(fieldName)}</label>
         </FloatLabel>
     )

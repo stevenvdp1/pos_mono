@@ -19,7 +19,7 @@ export default defineConfig(() => ({
     conditions: ['@pos-mono/source'],
     alias: {
       '@pos-mono/quote-form': path.resolve(__dirname, '../../libs/poseidon/quote-form/src/index.tsx'),
-      '@pos-mono/quote-form-fields': path.resolve(__dirname, '../../libs/poseidon/quote-form-fields/src/index.ts'),
+      '@pos-mono/quote-form-ui': path.resolve(__dirname, '../../libs/poseidon/quote-form-ui/src/index.ts'),
       '@pos-mono/poseidon-api': path.resolve(__dirname, '../../libs/poseidon-api/src/index.ts'),
       '@pos-mono/authentication': path.resolve(__dirname, '../../libs/authentication/src/index.ts'),
     },
