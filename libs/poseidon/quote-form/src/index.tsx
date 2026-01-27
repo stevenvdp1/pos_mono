@@ -1,5 +1,5 @@
 import { FormProvider } from "react-hook-form"
-import { QuoteFormGeneral, QuoteFormPortCalls, QuoteFormTimeline } from "./components"
+import { QuoteFormGeneral, QuoteFormPortCalls, QuoteFormRates, QuoteFormTimeline } from "./components"
 import { useQuoteForm } from "./hooks"
 import { Button } from 'primereact/button';
 
@@ -12,6 +12,7 @@ const QuoteForm = () => {
                 <QuoteFormGeneral/>
                 <QuoteFormPortCalls/>
                 <QuoteFormTimeline/>
+                <QuoteFormRates/>
                 <Button type="submit" label="Submit" /> 
             </form>
             {JSON.stringify(methods.watch())}

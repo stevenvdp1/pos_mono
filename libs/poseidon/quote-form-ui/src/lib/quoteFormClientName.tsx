@@ -27,14 +27,9 @@ export const QuoteFormClientName = () => {
                             options={clientConfigs?.map(client => (client)) || []}
                             optionLabel="name"
                             onChange={(e) => {
-                                if (typeof e.value === "string") {
-                                    field.onChange(e.value)
-                                    setClientNote(undefined)
-                                }
-                                else {
-                                    field.onChange(e.value?.name)
-                                    setClientNote(e.value?.note || undefined)
-                                }
+                                field.onChange(e.value)
+                                if (typeof e.value === "string") setClientNote(undefined)
+                                else setClientNote(e.value?.note || undefined)
                             }}
                             loading={isPending}
                         />

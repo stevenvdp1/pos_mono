@@ -6,5 +6,5 @@
 @source "..\..\..\libs\poseidon\quote-form";
 @source "..\..\..\libs\poseidon\quote-form-ui";
 /* nx-tailwind-sources:end */
-
+@import 'primeicons/primeicons.css';
 @import "primereact/resources/themes/lara-light-cyan/theme.css";

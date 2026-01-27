@@ -1,5 +1,6 @@
-import { QuoteTextField, QuoteFormSection } from "@pos-mono/quote-form-ui"
-import { useFormContext } from "react-hook-form"
+import { QuoteTextField, QuoteFormSection, QuoteFormRow, QuoteFormPortCallCountry } from "@pos-mono/quote-form-ui"
+import { useFormContext, useWatch } from "react-hook-form"
+import { useTranslation } from "react-i18next"
 
 
 export const QuoteFormPortCalls = () => {
@@ -13,14 +14,27 @@ export const QuoteFormPortCalls = () => {
             }
         </QuoteFormSection>
     )
-
 }
 
 
 const QuoteFormPortCall = ({ index }: { index: number }) => {
+    const { t } = useTranslation()
+    const { control } = useFormContext()
+    
+    const portCallTitle = useWatch({control, name: `portCalls.${index}`, compute:(portCall) => {
+        let title = ""
+        if(!portCall || !portCall.country) return t("portCall") + " " + (index + 1)
+        if(portCall.country) title += portCall.country.name
+        if(portCall.portName) title += ` - ${portCall.portName}`
+        return title
+    }})
+
     return (
-        <QuoteFormSection label={`portCall ${index + 1}`}>
-            <QuoteTextField fieldName={`portCalls.${index}.portName`} />
+        <QuoteFormSection label={portCallTitle}>
+            <QuoteFormRow>
+                <QuoteFormPortCallCountry index={index} />
+                <QuoteTextField fieldName={`portCalls.${index}.portName`} label={"portName"} />
+            </QuoteFormRow>
         </QuoteFormSection>
     )
 }

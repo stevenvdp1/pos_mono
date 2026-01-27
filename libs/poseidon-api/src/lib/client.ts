@@ -21,7 +21,7 @@ export const getApiClient = (): Client => {
  * Reset the API client instance (useful for testing or changing base URL)
  */
 export const resetApiClient = (): void => {
-    apiClientInstance = null;
+    apiClientInstance = null;   
 };
 
 /**

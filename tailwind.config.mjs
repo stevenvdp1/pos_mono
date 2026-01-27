@@ -7,5 +7,3 @@ export default {
     './libs/authentication/**/*.{js,ts,jsx,tsx}',
   ],
 }
-
-

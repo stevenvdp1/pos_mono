@@ -2,6 +2,12 @@ export * from './quoteTextField';
 export * from './quoteNumberField';
 export * from './quoteFormRow';
 export * from './quoteFormSection';
-export * from './quoteFormClientName'
+export * from './quoteFormClientName';
 export * from './quoteDateField';
 export * from './quoteDescriptionField';
+export * from './quoteFormScope';
+export * from './quoteFormPortCallCountry';
+export * from './quoteFormRatesEquipment';
+export * from './quoteOverrideField';
+export * from './quoteFormConfig';
+export * from './quoteOverrideEdit';

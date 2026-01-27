@@ -6,9 +6,10 @@ import { useTranslation } from "react-i18next";
 
 export interface IQuoteTextFieldProps {
     fieldName: string;
+    label?: string;
 }
 
-export const QuoteTextField: React.FC<IQuoteTextFieldProps> = ({ fieldName }) => {
+export const QuoteTextField: React.FC<IQuoteTextFieldProps> = ({ fieldName, label }) => {
     const id = useId();
     const { t } = useTranslation();
     const formContext = useFormContext();
@@ -26,7 +27,7 @@ export const QuoteTextField: React.FC<IQuoteTextFieldProps> = ({ fieldName }) =>
                     />
                 )}
             />
-            <label htmlFor={fieldName}>{t(fieldName)}</label>
+            <label htmlFor={fieldName}>{t(label??fieldName)}</label>
         </FloatLabel>
     )
 }
