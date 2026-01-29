@@ -1,6 +1,6 @@
 import { DeepPartial, useForm, useWatch } from "react-hook-form"
 import { useEffect } from "react"
-import { ClientConfigDto, useJobs } from "@pos-mono/poseidon-api"
+import { ClientConfigDto, JobRateDtoPersonnelRole, useJobs } from "@pos-mono/poseidon-api"
 import { IQuoteScopeItem, IQuoteOverrideField } from "@pos-mono/quote-form-ui"
 
 export interface IQuoteForm {
@@ -25,13 +25,19 @@ export interface IQuoteForm {
         country: {
             id: string
             name: string
-        }
+        },
+        teamType: 'OneDiverInWater' | 'TwoDiversInWater',
+        teamConfiguration:Array<{
+            role:IQuoteOverrideField<string>
+            count:IQuoteOverrideField<number>
+        }>
     }>
     equipments: Array<{
         id: string,
         name: IQuoteOverrideField<string>,
         rate: IQuoteOverrideField<number>,
         rateType: IQuoteOverrideField<string>
+        equipmentGroup: string
     }>
 }
 
@@ -51,33 +57,58 @@ export const useQuoteForm = () => {
         defaultValues: QuoteFormDefaultValues
     })
 
+    const mainScope = useWatch({ name: "scope", control: methods.control, compute: (scope) => scope?.find(item => item?.isMainJob) });
+    const mainJob = jobs?.find(job => job.id === mainScope?.id)
+
     const totalPortCalls = useWatch({ name: "totalPortCalls", control: methods.control });
     useEffect(() => {
         const currentPortCalls = methods.getValues("portCalls") || [];
         const portCallsToAdd = (totalPortCalls || 0) - currentPortCalls.length;
         if (portCallsToAdd > 0) {
-            const newPortCalls = Array.from({ length: portCallsToAdd }, () => ({}));
+            const newPortCalls = Array.from({ length: portCallsToAdd }, () => ({
+                teamConfiguration: Object.values(JobRateDtoPersonnelRole).reduce((acc, role) => {{
+                    acc.push({
+                        role: { baseValue: role },
+                        count: { baseValue: 0 }
+                    });
+                    return acc;
+                }}, [] as Array<{ role: IQuoteOverrideField<string>, count: IQuoteOverrideField<number> }>),
+            }));
             methods.setValue("portCalls", [...currentPortCalls, ...newPortCalls]);
         } else if (portCallsToAdd < 0) {
             methods.setValue("portCalls", currentPortCalls.slice(0, totalPortCalls || 0));
         }
     }, [totalPortCalls])
 
-    const portCalls = useWatch({ name: "portCalls", control: methods.control });
+    const portCalls = useWatch({ name: "portCalls", control: methods.control })??[];
+    const portCallsTeamSizes = useWatch({ name: "portCalls", control: methods.control, compute: (portCalls) => portCalls?.map(portCall => portCall?.teamType) });
     useEffect(() => {
-        console.log('portCalls changed:', portCalls);
-    }, [portCalls])
-
+        if(mainJob && portCalls?.length > 0){
+            const updatedPortCalls = portCalls.map((portCall)=>{
+                const teamType = portCall?.teamType
+                if(!teamType) return portCall;
+                const jobTeamConfig = mainJob.teamConfigurations?.[teamType] ?? {};
+                const updatedTeamConfiguration = Object.entries(jobTeamConfig).map(([role, count])=>{
+                    const existingRole = portCall.teamConfiguration?.find(tc => tc?.role?.baseValue === role);
+                    return {
+                        role: { ...existingRole?.role, baseValue: role },
+                        count: { ...existingRole?.count, baseValue: count }
+                    };
+                })
+                return {...portCall, teamConfiguration: updatedTeamConfiguration}
+            })
+            methods.setValue("portCalls", updatedPortCalls);
+        }
+    }, [portCallsTeamSizes, mainJob])
 
     //rates based on main job scope and config
-    const mainScope = useWatch({ name: "scope", control: methods.control, compute: (scope) => scope?.find(item => item?.isMainJob) });
     const configId = useWatch({ name: "configId", control: methods.control });
     useEffect(() => {
-        const mainJob = jobs?.find(job => job.id === mainScope?.id)
         if (!mainJob) return;
         const equipments = mainJob.equipments?.map(equipment => {
             return {
                 id: equipment.id,
+                equipmentGroup: equipment.equipmentGroup,
                 name: { baseValue: equipment.name },
                 rate: {
                     baseValue: equipment.rate ?? 0,
@@ -87,7 +118,7 @@ export const useQuoteForm = () => {
             }
         })
         methods.setValue("equipments", equipments)
-    }, [mainScope, jobs, configId])
+    }, [mainJob, configId])
 
 
     const onSubmit = methods.handleSubmit((e) => console.log(e))

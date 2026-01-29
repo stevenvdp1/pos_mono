@@ -1,4 +1,4 @@
-import { QuoteTextField, QuoteFormSection, QuoteFormRow, QuoteFormPortCallCountry } from "@pos-mono/quote-form-ui"
+import { QuoteTextField, QuoteFormSection, QuoteFormRow, QuoteFormPortCallCountry, QuoteFormPortCallManning, QuoteDropdownField } from "@pos-mono/quote-form-ui"
 import { useFormContext, useWatch } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
@@ -35,6 +35,8 @@ const QuoteFormPortCall = ({ index }: { index: number }) => {
                 <QuoteFormPortCallCountry index={index} />
                 <QuoteTextField fieldName={`portCalls.${index}.portName`} label={"portName"} />
             </QuoteFormRow>
+            <QuoteDropdownField fieldName={`portCalls.${index}.teamType`} label={"teamType"} options={[{label: "oneDiverInWater", value: "OneDiverInWater"}, {label: "twoDiversInWater", value: "TwoDiversInWater"}]} />
+            <QuoteFormPortCallManning index={index} />
         </QuoteFormSection>
     )
 }

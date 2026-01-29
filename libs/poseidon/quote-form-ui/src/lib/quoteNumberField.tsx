@@ -13,13 +13,13 @@ export interface IQuoteNumberFieldProps {
 export const QuoteNumberField: React.FC<IQuoteNumberFieldProps> = ({ fieldName, max, min }) => {
     const id = useId();
     const { t } = useTranslation();
-    const formContext = useFormContext();
+    const {control} = useFormContext();
 
     return (
         <FloatLabel>
             <Controller
                 name={fieldName}
-                control={formContext.control}
+                control={control}
                 render={({ field }) => (
                     <InputNumber
                         id={id}

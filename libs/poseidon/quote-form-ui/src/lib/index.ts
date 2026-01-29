@@ -11,3 +11,5 @@ export * from './quoteFormRatesEquipment';
 export * from './quoteOverrideField';
 export * from './quoteFormConfig';
 export * from './quoteOverrideEdit';
+export * from './quoteFormPortCallManning';
+export * from './quoteDropdownField';
