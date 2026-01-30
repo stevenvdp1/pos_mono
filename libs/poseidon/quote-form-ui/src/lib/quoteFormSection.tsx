@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 
 interface IQuoteFormSectionProps extends PropsWithChildren {
     label: string
+    defaultOpen?: boolean
 }
 
-export const QuoteFormSection: React.FC<IQuoteFormSectionProps> = ({ label, children }) => {
+export const QuoteFormSection: React.FC<IQuoteFormSectionProps> = ({ label, children, defaultOpen=false }) => {
     const id = useId();
     const { t } = useTranslation();
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(defaultOpen);
 
     return (
         <div id={id}>

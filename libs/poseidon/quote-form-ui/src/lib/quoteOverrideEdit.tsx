@@ -13,7 +13,7 @@ export const QuoteOverrideEditText = (options: ColumnEditorOptions) => {
 export const QuoteOverrideEditNumber = (options: ColumnEditorOptions) => {
     const field = options.rowData[options.field]
     const value = field.quoteValue ?? field.configValue ?? field.baseValue
-    return <InputNumber className="w-full" type="text" value={value} onValueChange={e => options.editorCallback?.({ ...field, quoteValue: e.value })} />
+    return <InputNumber className="w-full" value={value} onValueChange={e => options.editorCallback?.({ ...field, quoteValue: e.value })} />
 }
 
 export const QuoteOverrideEditRateType = (options: ColumnEditorOptions) => {

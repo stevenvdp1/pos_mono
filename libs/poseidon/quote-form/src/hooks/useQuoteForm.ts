@@ -28,8 +28,10 @@ export interface IQuoteForm {
         },
         teamType: 'OneDiverInWater' | 'TwoDiversInWater',
         teamConfiguration:Array<{
+            id:JobRateDtoPersonnelRole,
             role:IQuoteOverrideField<string>
             count:IQuoteOverrideField<number>
+            external:number
         }>
     }>
     equipments: Array<{
@@ -40,7 +42,6 @@ export interface IQuoteForm {
         equipmentGroup: string
     }>
 }
-
 
 
 const QuoteFormDefaultValues: DeepPartial<IQuoteForm> = {
@@ -68,11 +69,13 @@ export const useQuoteForm = () => {
             const newPortCalls = Array.from({ length: portCallsToAdd }, () => ({
                 teamConfiguration: Object.values(JobRateDtoPersonnelRole).reduce((acc, role) => {{
                     acc.push({
+                        id: role as JobRateDtoPersonnelRole,
+                        external: 0,
                         role: { baseValue: role },
                         count: { baseValue: 0 }
                     });
                     return acc;
-                }}, [] as Array<{ role: IQuoteOverrideField<string>, count: IQuoteOverrideField<number> }>),
+                }}, [] as Array<{ id: JobRateDtoPersonnelRole, role: IQuoteOverrideField<string>, count: IQuoteOverrideField<number>, external:number}>),
             }));
             methods.setValue("portCalls", [...currentPortCalls, ...newPortCalls]);
         } else if (portCallsToAdd < 0) {
@@ -89,10 +92,12 @@ export const useQuoteForm = () => {
                 if(!teamType) return portCall;
                 const jobTeamConfig = mainJob.teamConfigurations?.[teamType] ?? {};
                 const updatedTeamConfiguration = Object.entries(jobTeamConfig).map(([role, count])=>{
-                    const existingRole = portCall.teamConfiguration?.find(tc => tc?.role?.baseValue === role);
+                    const existingRole = portCall.teamConfiguration?.find(tc => tc?.id === role);
                     return {
+                        ...existingRole,
                         role: { ...existingRole?.role, baseValue: role },
-                        count: { ...existingRole?.count, baseValue: count }
+                        count: { ...existingRole?.count, baseValue: count },
+                        external: existingRole?.external ?? 0
                     };
                 })
                 return {...portCall, teamConfiguration: updatedTeamConfiguration}

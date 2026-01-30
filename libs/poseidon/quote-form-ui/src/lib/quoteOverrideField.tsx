@@ -13,6 +13,10 @@ export interface IQuoteOverrideFieldProps {
     prefix?: string
 }
 
+export const getOverrideFieldValue = <T,>(field: IQuoteOverrideField<T>): T => {
+    return field.quoteValue ?? field.configValue ?? field.baseValue
+}
+
 export const QuoteOverrideField: React.FC<IQuoteOverrideFieldProps> = ({ field, prefix }) => {
     const id = useId()
     const { t } = useTranslation()
@@ -21,7 +25,7 @@ export const QuoteOverrideField: React.FC<IQuoteOverrideFieldProps> = ({ field, 
     return (
         <div className={`override-tooltip-${id} inline-flex items-center gap-2`}>
             {showIcon && <i className="pi pi-exclamation-circle text-orange-500"></i>}
-            <span>{prefix} {field.quoteValue || field.configValue || field.baseValue}</span>
+            <span>{prefix} {getOverrideFieldValue(field)}</span>
             {
                 hasTooltip &&
                 <Tooltip target={`.override-tooltip-${id}`}>
