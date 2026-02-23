@@ -82,8 +82,8 @@ export const QuoteFormScope: React.FC = () => {
                         display="chip"
                         loading={isPending}
                         showSelectAll={false}
-                        panelHeaderTemplate={() => <></>}
                         onChange={onChange}
+                        filter
                         selectedItemTemplate={SelectedItemTemplate}
                         className="w-full [&_.p-multiselect-label]:!flex [&_.p-multiselect-label]:!flex-wrap [&_.p-multiselect-label]:!h-auto [&_.p-multiselect-label]:!overflow-visible"
                         pt={{

@@ -109,7 +109,7 @@ export const useQuoteForm = () => {
     //rates based on main job scope and config
     const configId = useWatch({ name: "configId", control: methods.control });
     useEffect(() => {
-        if (!mainJob) return;
+        if (!mainJob) return methods.setValue("equipments", []);
         const equipments = mainJob.equipments?.map(equipment => {
             return {
                 id: equipment.id,
