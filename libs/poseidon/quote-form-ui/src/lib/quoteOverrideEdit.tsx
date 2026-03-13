@@ -1,4 +1,4 @@
-import { EquipmentDtoRateType } from "@pos-mono/poseidon-api"
+import { EquipmentDtoRateType, TimeLineItemDtoDurationType, TimeLineItemDtoTimeLineItemType } from "@pos-mono/poseidon-api"
 import { ColumnEditorOptions } from "primereact/column"
 import { Dropdown } from "primereact/dropdown"
 import { InputNumber } from "primereact/inputnumber"
@@ -24,6 +24,32 @@ export const QuoteOverrideEditRateType = (options: ColumnEditorOptions) => {
             className="w-full"
             value={value}
             options={Object.values(EquipmentDtoRateType).map(rt => ({ label: rt, value: rt }))}
+            onChange={e=>options.editorCallback?.({ ...field, quoteValue: e.value })}
+        />
+    )
+}
+
+export const QuoteOverrideEditDurationType = (options: ColumnEditorOptions) => {
+    const field = options.rowData[options.field]
+    const value = field.quoteValue ?? field.configValue ?? field.baseValue
+    return (
+        <Dropdown
+            className="w-full"
+            value={value}
+            options={Object.values(TimeLineItemDtoDurationType).map(dt => ({ label: dt, value: dt }))}
+            onChange={e=>options.editorCallback?.({ ...field, quoteValue: e.value })}
+        />
+    )
+}
+
+export const QuoteOverrideEditTimeLineItemType = (options: ColumnEditorOptions) => {
+    const field = options.rowData[options.field]
+    const value = field.quoteValue ?? field.configValue ?? field.baseValue
+    return (
+        <Dropdown
+            className="w-full"
+            value={value}
+            options={Object.values(TimeLineItemDtoTimeLineItemType).map(t => ({ label: t, value: t }))}
             onChange={e=>options.editorCallback?.({ ...field, quoteValue: e.value })}
         />
     )

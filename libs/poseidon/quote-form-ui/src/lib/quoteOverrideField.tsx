@@ -8,6 +8,12 @@ export interface IQuoteOverrideField<T> {
     quoteValue?: T
 }
 
+export interface IWorkerExpense {
+    id: string
+    description: IQuoteOverrideField<string>
+    amount: IQuoteOverrideField<number>
+}
+
 export interface IQuoteOverrideFieldProps {
     field: IQuoteOverrideField<any>
     prefix?: string

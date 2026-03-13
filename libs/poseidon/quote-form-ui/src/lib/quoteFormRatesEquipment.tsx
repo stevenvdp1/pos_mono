@@ -19,7 +19,7 @@ export const QuoteFormRatesEquipment = () => {
     })
 
     const updateRow = (e: any) => {
-        let newData = { ...e.newData }
+        const newData = { ...e.newData }
         if (newData.name.quoteValue === "") delete newData.name.quoteValue
         if (newData.rate.quoteValue === null) delete newData.rate.quoteValue
         update(e.index, newData)

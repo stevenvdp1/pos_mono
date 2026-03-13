@@ -1,7 +1,7 @@
 import { DeepPartial, useForm, useWatch } from "react-hook-form"
 import { useEffect } from "react"
-import { ClientConfigDto, JobRateDtoPersonnelRole, useJobs } from "@pos-mono/poseidon-api"
-import { IQuoteScopeItem, IQuoteOverrideField } from "@pos-mono/quote-form-ui"
+import { ClientConfigDto, JobRateDtoPersonnelRole, TimeLineItemDtoDurationType, TimeLineItemDtoTimeLineItemType, useJobs } from "@pos-mono/poseidon-api"
+import { IQuoteScopeItem, IQuoteOverrideField, IWorkerExpense } from "@pos-mono/quote-form-ui"
 
 export interface IQuoteForm {
     configId: string
@@ -32,6 +32,8 @@ export interface IQuoteForm {
             role:IQuoteOverrideField<string>
             count:IQuoteOverrideField<number>
             external:number
+            localExpenses: IWorkerExpense[]
+            externalExpenses: IWorkerExpense[]
         }>
     }>
     equipments: Array<{
@@ -40,6 +42,13 @@ export interface IQuoteForm {
         rate: IQuoteOverrideField<number>,
         rateType: IQuoteOverrideField<string>
         equipmentGroup: string
+    }>
+    timelineItems: Array<{
+        id: number,
+        description: IQuoteOverrideField<string>,
+        duration: IQuoteOverrideField<number>,
+        durationType: IQuoteOverrideField<TimeLineItemDtoDurationType>,
+        timeLineItemType: IQuoteOverrideField<TimeLineItemDtoTimeLineItemType>
     }>
 }
 
@@ -67,15 +76,17 @@ export const useQuoteForm = () => {
         const portCallsToAdd = (totalPortCalls || 0) - currentPortCalls.length;
         if (portCallsToAdd > 0) {
             const newPortCalls = Array.from({ length: portCallsToAdd }, () => ({
-                teamConfiguration: Object.values(JobRateDtoPersonnelRole).reduce((acc, role) => {{
+                teamConfiguration: Object.values(JobRateDtoPersonnelRole).reduce((acc, role) => {
                     acc.push({
                         id: role as JobRateDtoPersonnelRole,
                         external: 0,
                         role: { baseValue: role },
-                        count: { baseValue: 0 }
+                        count: { baseValue: 0 },
+                        localExpenses: [],
+                        externalExpenses: []
                     });
                     return acc;
-                }}, [] as Array<{ id: JobRateDtoPersonnelRole, role: IQuoteOverrideField<string>, count: IQuoteOverrideField<number>, external:number}>),
+                }, [] as Array<{ id: JobRateDtoPersonnelRole, role: IQuoteOverrideField<string>, count: IQuoteOverrideField<number>, external: number, localExpenses: IWorkerExpense[], externalExpenses: IWorkerExpense[] }>),
             }));
             methods.setValue("portCalls", [...currentPortCalls, ...newPortCalls]);
         } else if (portCallsToAdd < 0) {
@@ -97,7 +108,9 @@ export const useQuoteForm = () => {
                         ...existingRole,
                         role: { ...existingRole?.role, baseValue: role },
                         count: { ...existingRole?.count, baseValue: count },
-                        external: existingRole?.external ?? 0
+                        external: existingRole?.external ?? 0,
+                        localExpenses: existingRole?.localExpenses ?? [],
+                        externalExpenses: existingRole?.externalExpenses ?? []
                     };
                 })
                 return {...portCall, teamConfiguration: updatedTeamConfiguration}
@@ -125,6 +138,21 @@ export const useQuoteForm = () => {
         methods.setValue("equipments", equipments)
     }, [mainJob, configId])
 
+
+    //timeline items based on main job scope
+    useEffect(() => {
+        if (!mainJob) return methods.setValue("timelineItems", []);
+        const timelineItems = mainJob.timeLine?.map(item => {
+            return {
+                id: item.id,
+                description: { baseValue: item.description },
+                duration: { baseValue: item.duration },
+                durationType: { baseValue: item.durationType },
+                timeLineItemType: { baseValue: item.timeLineItemType }
+            }
+        })
+        methods.setValue("timelineItems", timelineItems)
+    }, [mainJob])
 
     const onSubmit = methods.handleSubmit((e) => console.log(e))
     return {
